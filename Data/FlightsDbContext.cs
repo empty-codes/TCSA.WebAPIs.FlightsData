@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TCSA.WebAPIs.FlightsData.Models;
 
 namespace TCSA.WebAPIs.FlightsData.Data
 {
