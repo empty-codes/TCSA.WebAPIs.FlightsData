@@ -13,7 +13,7 @@ namespace TCSA.WebAPIs.FlightsData.Services
     }
     public class FlightService: IFlightService
     {
-        private readonly IFlightService _dbContext;
+        private readonly FlightsDbContext _dbContext;
         public FlightService(FlightsDbContext dbContext)
         {
             _dbContext = dbContext;

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TCSA.WebAPIs.FlightsData.Models;
 using TCSA.WebAPIs.FlightsData.Services;
 
 namespace TCSA.WebAPIs.FlightsData.Controllers
 {
     [ApiController]
-    [Route("api/[controller")]
-    public class FlightsController
+    [Route("api/[controller]")]
+    public class FlightsController : ControllerBase
     {
         private readonly IFlightService _flightService;
         public FlightsController(IFlightService flightService)
@@ -22,7 +23,12 @@ namespace TCSA.WebAPIs.FlightsData.Controllers
         [HttpGet("{id}")]
         public ActionResult<Flight> GetFlightById(int id)
         {
-            return Ok(_flightService.GetFlightById(id));
+            var result = _flightService.GetFlightById(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
         [HttpPost]
@@ -34,13 +40,26 @@ namespace TCSA.WebAPIs.FlightsData.Controllers
         [HttpPut("{id}")]
         public ActionResult<Flight> UpdateFlight(int id, Flight updatedFlight)
         {
-            return Ok(_flightService.UpdateFlight(id, updatedFlight));
+            var result = _flightService.UpdateFlight(id, updatedFlight);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
-        [HttpDelete("{id")]
+        [HttpDelete("{id}")]
         public ActionResult<Flight> DeleteFlight(int id)
         {
-            return Ok(_flightService.DeleteFlight(id));
+            var result = _flightService.DeleteFlight(id);
+
+            if (result == null) {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }
